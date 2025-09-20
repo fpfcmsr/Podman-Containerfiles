@@ -1,0 +1,38 @@
+# nextcloud-app.container
+[Unit]
+Requires=nextcloud-database.service nextcloud-valkey.service
+After=nextcloud-database.service nextcloud-valkey.service
+
+[Container]
+Pod=nextcloud.pod
+ContainerName=nextcloud-app
+Image=docker.io/library/nextcloud:apache
+AutoUpdate=registry
+
+Mount=type=bind,src=/someplace/nextcloud,destination=/var/www/html
+
+#nextcloud admin user
+Environment=NEXTCLOUD_ADMIN_USER=coolusername
+
+Secret=nextcloud-admin-password,type=env,target=NEXTCLOUD_ADMIN_PASSWORD
+
+#mariadb variables
+Environment=MYSQL_USER=nextcloud
+Environment=MYSQL_HOST=127.0.0.1
+Environment=MYSQL_DATABASE=nextcloud
+
+Secret=nextcloud-database-password,type=env,target=MYSQL_PASSWORD
+
+# Redis variables
+Environment=REDIS_HOST=127.0.0.1
+Environment=REDIS_PORT=6379
+
+#Php
+Environment=PHP_UPLOAD_LIMIT=100G
+Environment=PHP_MEMORY_LIMIT=100G
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

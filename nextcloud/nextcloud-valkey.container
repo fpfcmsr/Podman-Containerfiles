@@ -1,0 +1,13 @@
+# nextcloud-valkey.container
+[Container]
+Pod=nextcloud.pod
+ContainerName=nextcloud-valkey
+Image=docker.io/valkey/valkey:latest
+AutoUpdate=registry
+
+Exec=--bind 127.0.0.1
+
+[Service]
+Restart=always
+RestartSec=5
+StartLimitBurst=5

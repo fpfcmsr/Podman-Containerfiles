@@ -1,0 +1,17 @@
+# nextcloud-cron.container
+[Unit]
+Requires=nextcloud-database.service nextcloud-valkey.service
+After=nextcloud-database.service nextcloud-valkey.service
+
+[Container]
+Pod=nextcloud.pod
+ContainerName=nextcloud-cron
+Image=docker.io/library/nextcloud:apache
+AutoUpdate=registry
+
+Entrypoint=/cron.sh
+#make sure this matches the folder in nextcloud-app
+Mount=type=bind,src=/someplace/nextcloud,destination=/var/www/html
+
+[Service]
+Restart=always

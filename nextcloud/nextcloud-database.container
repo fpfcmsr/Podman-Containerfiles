@@ -1,0 +1,22 @@
+# nextcloud-database.container
+[Container]
+Pod=nextcloud.pod
+ContainerName=nextcloud-database
+Image=docker.io/library/mariadb:lts
+AutoUpdate=registry
+
+Mount=type=bind,src=/someplace/db,destination=/var/lib/mysql
+Exec=--transaction-isolation=READ-COMMITTED --bind 127.0.0.1
+
+Environment=MYSQL_DATABASE=nextcloud
+Environment=MYSQL_USER=nextcloud
+Environment=MARIADB_AUTO_UPGRADE=1
+Environment=MARIADB_DISABLE_UPGRADE_BACKUP=1
+
+Secret=nextcloud-database-password,type=env,target=MYSQL_PASSWORD
+Secret=nextcloud-database-root-password,type=env,target=MYSQL_ROOT_PASSWORD
+
+[Service]
+Restart=always
+RestartSec=5
+StartLimitBurst=5
