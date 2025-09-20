@@ -35,6 +35,11 @@ echo "superstrongpassword" | podman secret create mypodmansecret -
 Remember to remove the value of the password from your bash history in ~/.bash_history  
 I recommend storing the passwords (as they are deleted) in a password manager or someplace safe  
 
+#### Generating containerfiles with podlet
+I have found a starting point for generating containerfiles from compose files with podlet: https://github.com/containers/podlet.  
+It is a good rough draft, though it won't capture the need for pods/networks.  
+If you have podman-desktop you can also generate containerfiles from a running container with the quadlet extension.  
+
 ## Useful Troubleshooting Commands
 systemctl --user restart <name-of-service> --no-block; journalctl --user -f  
 /usr/lib/systemd/system-generators/podman-system-generator --user --dryrun
