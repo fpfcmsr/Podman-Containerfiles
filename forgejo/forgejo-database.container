@@ -1,0 +1,20 @@
+# forgejo-database.container
+[Container]
+Pod=forgejo.pod
+ContainerName=forgejo-database
+Image=docker.io/library/postgres:14
+AutoUpdate=registry
+
+UserNS=keep-id:uid=1000,gid=1000
+
+Volume=/someplace/postgres:/var/lib/postgresql/data
+Exec=postgres -c listen_addresses=127.0.0.1
+
+Environment=POSTGRES_DB=forgejo
+Environment=POSTGRES_USER=forgejo
+Secret=forgejo-database-password,type=env,target=POSTGRES_PASSWORD
+
+[Service]
+Restart=always
+RestartSec=5
+StartLimitBurst=5

@@ -1,0 +1,27 @@
+# forgejo.container
+[Unit]
+Requires=forgejo-database.service
+After=forgejo-database.service
+
+[Container]
+Pod=forgejo.pod
+ContainerName=forgejo-app
+Image=codeberg.org/forgejo/forgejo:12-rootless
+AutoUpdate=registry
+
+UserNS=keep-id:uid=1000,gid=1000
+
+Mount=type=bind,src=/someplace/data,destination=/var/lib/gitea
+Mount=type=bind,src=/someplace/conf,destination=/etc/gitea
+
+Environment=FORGEJO__database__DB_TYPE=postgres
+Environment=FORGEJO__database__HOST=127.0.0.1:5432
+Environment=FORGEJO__database__NAME=forgejo
+Environment=FORGEJO__database__USER=forgejo
+Secret=forgejo-database-password,type=env,target=FORGEJO__database__PASSWD
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
