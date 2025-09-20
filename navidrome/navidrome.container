@@ -1,0 +1,15 @@
+[Container]
+ContainerName=navidrome
+Image=docker.io/deluan/navidrome:latest
+AutoUpdate=registry
+
+Mount=type=bind,src=/someplace/data,destination=/data
+Volume=/someplace/music:/music:ro
+
+PublishPort=4533:4533
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
