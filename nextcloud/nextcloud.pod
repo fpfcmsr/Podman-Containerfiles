@@ -1,0 +1,5 @@
+# nextcloud.pod
+[Pod]
+PublishPort=8080:80
+
+# check the readme for how to set up the podman secret(s)
