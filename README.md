@@ -44,8 +44,6 @@ If you have podman-desktop you can also generate containerfiles from a running c
 systemctl --user restart <name-of-service> --no-block; journalctl --user -f  
 /usr/lib/systemd/system-generators/podman-system-generator --user --dryrun
 
-check out anatomy_of_a_containerfile for some basics on what's the different parts of the containerfile mean. Note, its not comprehensive, but just my current understanding. PRs improving it gratefully accepted.
-
 ## References:
 https://blog.datalad.org/posts/forgejo-aneksajo-podman-deployment/  
 https://thinkaboutit.tech/posts/2025-07-13-implement-nextcloud-with-podman-quadlet/#create-pod  
@@ -54,3 +52,4 @@ https://forgejo.org/docs/latest/admin/installation/docker/
 https://www.redhat.com/en/blog/multi-container-application-podman-quadlet  
 https://www.redhat.com/en/blog/podman-kubernetes-secrets  
 https://old.reddit.com/r/podman/comments/16onu8p/podman_secrets_how_the_hell_does_it_work/  
+https://github.com/jbtrystram/immich-podman-systemd/tree/main
