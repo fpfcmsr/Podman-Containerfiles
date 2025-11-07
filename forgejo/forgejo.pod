@@ -1,4 +1,3 @@
-# forgejo.pod  
 [Pod]  
 PublishPort=3000:3000  
 PublishPort=2222:2222  
