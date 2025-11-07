@@ -1,0 +1,21 @@
+# linkwarden.container
+[Unit]
+Requires=linkwarden-postgres.service linkwarden-meilisearch.service
+After=linkwarden-postgres.service linkwarden-meilisearch.service
+
+[Container]
+Image=ghcr.io/linkwarden/linkwarden:latest
+Pod=linkwarden.pod
+ContainerName=linkwarden-app
+
+AutoUpdate=registry
+Volume=/someplace/linkwarden/data:/data/data
+
+EnvironmentFile=linkwarden.env
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
+

@@ -1,0 +1,27 @@
+# atuin.container
+[Unit]
+Requires=atuin-postgres.service
+After=atuin-postgres.service
+
+[Container]
+Pod=atuin.pod
+
+ContainerName=atuin-app
+UserNS=keep-id:uid=1000,gid=1000
+
+Environment=ATUIN_HOST=0.0.0.0
+Environment=ATUIN_OPEN_REGISTRATION=true
+Environment=ATUIN_DB_URI=postgres://atuin:SuperSecurePassword@127.0.0.1:5432/atuin
+Environment=RUST_LOG=info,atuin_server=debug
+Exec=server start
+
+Image=ghcr.io/atuinsh/atuin:latest
+Volume=/hhd_pool/atuin/config:/config
+AutoUpdate=registry
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
+

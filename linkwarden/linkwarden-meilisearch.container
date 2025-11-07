@@ -1,0 +1,11 @@
+# meilisearch.container
+[Container]
+Image=docker.io/getmeili/meilisearch:latest
+Volume=/someplace/linkwarden/meili:/meili_data
+Pod=linkwarden.pod
+ContainerName=linkwarden-meilisearch
+EnvironmentFile=linkwarden.env
+
+[Service]
+Restart=always
+

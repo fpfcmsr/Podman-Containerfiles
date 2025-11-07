@@ -1,0 +1,23 @@
+# immich-immich-machine-learning.container
+[Container]
+Pod=immich.pod
+ContainerName=immich-machine-learning
+Image=ghcr.io/immich-app/immich-machine-learning:release-openvino
+AutoUpdate=registry
+
+# This is specific to intel devices
+# refer to the immich docs for other configurations
+AddDevice=/dev/dri:/dev/dri
+Volume=/dev/bus/usb:/dev/bus/usb
+Volume=/hhd_pool/immich/cache:/cache
+
+HealthCmd=["/bin/bash", "-c", "exec 5<>/dev/tcp/127.0.0.1/3003"]
+HealthStartPeriod=30s
+HealthInterval=10s
+HealthTimeout=5s
+HealthRetries=5
+Notify=healthy
+
+[Service]
+Restart=always
+

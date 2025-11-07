@@ -1,0 +1,16 @@
+# postgres.container
+[Container]
+EnvironmentFile=linkwarden.env
+Image=docker.io/library/postgres:16
+AutoUpdate=registry
+ContainerName=linkwarden-postgres
+Pod=linkwarden.pod
+
+Volume=/someplace/linkwarden/postgres:/var/lib/postgresql/data
+Environment=POSTGRES_USER=linkwarden
+Environment=POSTGRES_DB=linkwarden
+
+Exec=postgres -c listen_addresses=127.0.0.1
+
+[Service]
+Restart=always

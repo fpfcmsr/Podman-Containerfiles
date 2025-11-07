@@ -1,0 +1,18 @@
+# atuin-postgres.container
+[Container]
+ContainerName=atuin-postgres
+
+Environment=POSTGRES_USER=atuin
+Environment=POSTGRES_PASSWORD=SuperSecurePassword
+Environment=POSTGRES_DB=atuin
+
+Pod=atuin.pod
+Image=docker.io/postgres:14
+Volume=/hhd_pool/atuin/database:/var/lib/postgresql/data/
+AutoUpdate=registry
+
+Exec=postgres -c listen_addresses=127.0.0.1
+
+[Service]
+Restart=always
+

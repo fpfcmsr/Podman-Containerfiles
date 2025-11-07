@@ -1,0 +1,7 @@
+# linkwarden-ollama.container
+[Container]
+ContainerName=linkwarden-ollama
+Image=docker.io/ollama/ollama
+Volume=/someplace/linkwarden/ollama:/root/.ollama
+Pod=linkwarden.pod
+AutoUpdate=registry

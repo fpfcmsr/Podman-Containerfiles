@@ -1,0 +1,23 @@
+# immich-postgres.container
+[Container]
+Pod=immich.pod
+ContainerName=immich-postgres
+Image=ghcr.io/immich-app/postgres:14-vectorchord0.4.3-pgvectors0.2.0
+
+AutoUpdate=registry
+EnvironmentFile=immich.env
+Environment=POSTGRES_INITDB_ARGS=--data-checksums
+
+Volume=/hhd_pool/immich/postgres:/var/lib/postgresql/data
+ShmSize=128mb
+
+#HealthCmd=["/bin/bash", "/health.sh"]
+#HealthStartPeriod=5m
+#HealthInterval=30s
+#HealthTimeout=5s
+#HealthRetries=5
+#Notify=healthy
+
+[Service]
+Restart=always
+

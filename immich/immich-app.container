@@ -1,0 +1,23 @@
+# immich-app.container
+[Unit]
+Requires=immich-valkey.service immich-postgres.service
+After=immich-valkey.service immich-postgres.service
+
+[Container]
+Pod=immich.pod
+ContainerName=immich-app
+Image=ghcr.io/immich-app/immich-server:release
+AutoUpdate=registry
+
+EnvironmentFile=immich.env
+
+Volume=/hhd_pool/immich/library:/data
+#Volume=/etc/localtime:/etc/localtime:ro
+
+[Service]
+ExecStartPre=sleep 30s
+Restart=always
+
+[Install]
+WantedBy=default.target
+

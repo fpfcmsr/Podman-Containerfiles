@@ -1,0 +1,19 @@
+# immich-redis.container
+[Container]
+Pod=immich.pod
+ContainerName=immich-redis
+Image=docker.io/valkey/valkey:latest
+AutoUpdate=registry
+
+#HealthCmd=redis-cli ping || exit 1
+#Exec=--bind 127.0.0.1
+#HealthCmd="/usr/local/bin/redis-cli ping || exit 1"
+#HealthStartPeriod=30s
+#HealthInterval=10s
+#HealthTimeout=5s
+#HealthRetries=5
+#Notify=healthy
+
+[Service]
+Restart=always
+
