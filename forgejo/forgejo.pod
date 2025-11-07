@@ -1,5 +1,5 @@
-[Pod]  
-PublishPort=3000:3000  
-PublishPort=2222:2222  
+[Pod]   
+PublishPort=3000:3000   
+PublishPort=2222:2222   
 
 # check the readme for how to set up the podman secret(s)  
